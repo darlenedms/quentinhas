@@ -66,15 +66,17 @@ a {
   text-decoration: none;
 }
 
-/* line 6, ../sass/listagem.scss */
+/* line 3, ../sass/_quentinha-ui.scss */
 header {
   width: 100%;
   background-color: #F5F5F5;
   margin-bottom: 30px;
   z-index: 20;
   vertical-align: center;
+  position: fixed;
+  top: 0;
 }
-/* line 15, ../sass/listagem.scss */
+/* line 14, ../sass/_quentinha-ui.scss */
 header h1 {
   color: #0669de;
   text-align: center;
@@ -83,15 +85,60 @@ header h1 {
   font-size: 25px;
   font-weight: 700;
   text-transform: uppercase;
-  line-height: 60px;
+  line-height: 50px;
+}
+/* line 29, ../sass/_quentinha-ui.scss */
+header .zoeira {
+  font-family: 'Parisienne', cursive;
+  text-align: center;
+  font-size: 15px;
+  margin-top: -17px;
+  line-height: 30px;
 }
 
-/* line 32, ../sass/listagem.scss */
+/* line 8, ../sass/listagem.scss */
+header {
+  width: 100%;
+  background-color: #F5F5F5;
+  margin-bottom: 30px;
+  z-index: 20;
+  vertical-align: center;
+  position: fixed;
+  top: 0;
+}
+/* line 19, ../sass/listagem.scss */
+header h1 {
+  color: #0669de;
+  text-align: center;
+  vertical-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 50px;
+}
+/* line 34, ../sass/listagem.scss */
+header .zoeira {
+  font-family: 'Parisienne', cursive;
+  text-align: center;
+  font-size: 15px;
+  margin-top: -17px;
+  line-height: 30px;
+}
+
+/* line 43, ../sass/listagem.scss */
+main {
+  margin-top: 110px;
+}
+
+/* line 47, ../sass/listagem.scss */
 p {
   margin-bottom: 10px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
 }
 
-/* line 36, ../sass/listagem.scss */
+/* line 53, ../sass/listagem.scss */
 h2 {
   position: relative;
   text-align: center;
@@ -102,32 +149,59 @@ h2 {
   text-transform: uppercase;
 }
 
-/* line 49, ../sass/listagem.scss */
+/* line 66, ../sass/listagem.scss */
 h3 {
   font: arial;
   font-size: 25px;
   font-family: "Roboto", sans-serif;
   font-weight: 500;
-  margin-right: 120px;
   float: left;
 }
 
-/* line 60, ../sass/listagem.scss */
+/* line 76, ../sass/listagem.scss */
 #lista {
   list-style-type: none;
 }
-/* line 64, ../sass/listagem.scss */
+/* line 80, ../sass/listagem.scss */
 #lista li {
   padding: 20px 0 20px 30px;
   width: 100%;
   height: auto;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   border-top: 1px solid #F5F5F5;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
-/* line 71, ../sass/listagem.scss */
+/* line 88, ../sass/listagem.scss */
 #lista li .preco {
   font-family: Roboto, arial;
   font-weight: 500;
   color: #d2d2d2;
   margin-bottom: 20px;
+  text-align: right;
+  margin-right: 20px;
+}
+
+/* line 102, ../sass/listagem.scss */
+button {
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 10px;
+  background: #0669de;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  border: 0px;
+  float: right;
+  margin-right: 20px;
+}
+/* line 114, ../sass/listagem.scss */
+button:hover {
+  background: #0a62c7;
+  text-decoration: none;
 }

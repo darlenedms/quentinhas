@@ -1,0 +1,97 @@
+@charset "utf-8";
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+/* CSS Document */
+/* line 20, /Users/tahiana.silva/Documents/repositorio/quentinhas/sass/_reset.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+/* line 30, /Users/tahiana.silva/Documents/repositorio/quentinhas/sass/_reset.scss */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+/* line 33, /Users/tahiana.silva/Documents/repositorio/quentinhas/sass/_reset.scss */
+body {
+  line-height: 1;
+}
+
+/* line 36, /Users/tahiana.silva/Documents/repositorio/quentinhas/sass/_reset.scss */
+ol, ul, li {
+  list-style: none;
+}
+
+/* line 39, /Users/tahiana.silva/Documents/repositorio/quentinhas/sass/_reset.scss */
+blockquote, q {
+  quotes: none;
+}
+
+/* line 43, /Users/tahiana.silva/Documents/repositorio/quentinhas/sass/_reset.scss */
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+/* line 47, /Users/tahiana.silva/Documents/repositorio/quentinhas/sass/_reset.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 52, /Users/tahiana.silva/Documents/repositorio/quentinhas/sass/_reset.scss */
+a {
+  text-decoration: none;
+}
+
+/* line 3, /Users/tahiana.silva/Documents/repositorio/quentinhas/sass/quentinha-ui.scss */
+header {
+  width: 100%;
+  background-color: #F5F5F5;
+  margin-bottom: 30px;
+  z-index: 20;
+  vertical-align: center;
+  position: fixed;
+  top: 0;
+}
+/* line 14, /Users/tahiana.silva/Documents/repositorio/quentinhas/sass/quentinha-ui.scss */
+header h1 {
+  color: #0669de;
+  text-align: center;
+  vertical-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 50px;
+}
+/* line 29, /Users/tahiana.silva/Documents/repositorio/quentinhas/sass/quentinha-ui.scss */
+header .zoeira {
+  font-family: 'Parisienne', cursive;
+  text-align: center;
+  font-size: 15px;
+  margin-top: -17px;
+  line-height: 30px;
+}
