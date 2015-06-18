@@ -38,6 +38,7 @@ app.get("/send", function(req, res) {
     });
 });
 
+
 app.get("/ler-email", function(req, res) {
     var Imap = require('imap'),
         inspect = require('util').inspect;
@@ -57,31 +58,29 @@ app.get("/ler-email", function(req, res) {
     imap.once('ready', function() {
         openInbox(function(err, box) {
             if (err) throw err;
+            
             var f = imap.seq.fetch('1:3', {
-                bodies: 'HEADER.FIELDS (FROM TO SUBJECT DATE)',
+                bodies: '',
                 struct: true
             });
 
             f.on('message', function(msg, seqno) {
-                console.log('Message #%d', seqno);
-
-                var prefix = '(#' + seqno + ') ';
                 msg.on('body', function(stream, info) {
                     var buffer = '';
                     stream.on('data', function(chunk) {
                         buffer += chunk.toString('utf8');
                     });
                     stream.once('end', function() {
-                        console.log(prefix + 'Parsed header: %s', inspect(Imap.parseHeader(buffer)));
+                        console.log(buffer);
+                        res.end(buffer);
                     });
                 });
-                msg.once('attributes', function(attrs) {
-                    console.log(prefix + 'Attributes: %s', inspect(attrs, false, 8));
-                });
             });
+            
             f.once('error', function(err) {
                 console.log('Fetch error: ' + err);
             });
+            
             f.once('end', function() {
                 console.log('Done fetching all messages!');
                 imap.end();
@@ -94,7 +93,6 @@ app.get("/ler-email", function(req, res) {
     });
 
     imap.once('end', function() {
-        console.log('Connection ended');
         res.end("ok");
     });
 
