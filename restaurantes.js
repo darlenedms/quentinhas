@@ -5,6 +5,8 @@ var restaurantes = [
         "online": true,
         "whatsapp": false,
         "mediaPreco": 1,
+        "email": "miscelaniadowntown@gmail.com",
+        "descricao": "Comida caseira e diversificada",
     },
     {
         "nome": "Quentinha da Ana",
@@ -12,13 +14,17 @@ var restaurantes = [
         "online": false,
         "whatsapp": false,
         "mediaPreco": 1,
+        "email": undefined,
+        "descricao": "Comida caseira",
     },
     {
-        "nome": "MegaArabe",
+        "nome": "MegaÁrabe",
         "telefone": "39822209",
         "online": false,
         "whatsapp": false,
         "mediaPreco": 2,
+        "email": undefined,
+        "descricao": "Comida árabe e brasileira",
     },
     {
         "nome": "BioCarioca",
@@ -26,5 +32,7 @@ var restaurantes = [
         "online": false,
         "whatsapp": false,
         "mediaPreco": 4,
+        "email": undefined,
+        "descricao": "Comida vegetariana",
     },
 ];
