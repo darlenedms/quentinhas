@@ -4,7 +4,7 @@ var restaurantes = [
         "telefone": "964089230",
         "online": true,
         "whatsapp": false,
-        "mediaPreco": 1, 
+        "mediaPreco": 1,
     },
     {
         "nome": "Quentinha da Ana",
