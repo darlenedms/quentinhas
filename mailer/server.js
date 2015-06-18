@@ -1,3 +1,5 @@
+var MailParser = require("mailparser").MailParser,
+    mailparser = new MailParser();
 var express = require("express");
 var app = express();
 
@@ -38,67 +40,70 @@ app.get("/send", function(req, res) {
     });
 });
 
-
 app.get("/ler-email", function(req, res) {
-    var Imap = require('imap'),
-        inspect = require('util').inspect;
+  var Imap = require('imap'),
+      inspect = require('util').inspect;
 
-    var imap = new Imap({
-        user: 'quentinhasaas@gmail.com',
-        password: 'quentinhas123',
-        host: 'imap.gmail.com',
-        port: 993,
-        tls: true
-    });
+  var imap = new Imap({
+    user: 'quentinhasaas@gmail.com',
+    password: 'quentinhas123',
+    host: 'imap.gmail.com',
+    port: 993,
+    tls: true
+  });
 
-    function openInbox(cb) {
-        imap.openBox('INBOX', true, cb);
-    }
+  function openInbox(cb) {
+    imap.openBox('INBOX', true, cb);
+  }
 
-    imap.once('ready', function() {
-        openInbox(function(err, box) {
-            if (err) throw err;
-            
-            var f = imap.seq.fetch('1:3', {
-                bodies: '',
-                struct: true
+  imap.once('ready', function() {
+    openInbox(function(err, box) {
+      if (err) throw err;
+
+      var f = imap.seq.fetch('1:3', {bodies: '', struct: true});
+
+      f.on('message', function(msg, seqno) {
+        msg.on('body', function(stream, info) {
+          var buffer = '';
+          stream.on('data', function(chunk) {
+            buffer += chunk.toString('utf8');
+          });
+
+          stream.once('end', function() {
+            mailparser.on("end", function(buffer) {
+              // console.log("From:", buffer.from); //[{address:'sender@example.com',name:'Sender Name'}]
+              // console.log("Subject:", buffer.subject); // Hello world!
+              // console.log("Text body:", buffer.text); // How are you today?
+              res.end(buffer.text);
             });
 
-            f.on('message', function(msg, seqno) {
-                msg.on('body', function(stream, info) {
-                    var buffer = '';
-                    stream.on('data', function(chunk) {
-                        buffer += chunk.toString('utf8');
-                    });
-                    stream.once('end', function() {
-                        console.log(buffer);
-                        res.end(buffer);
-                    });
-                });
-            });
-            
-            f.once('error', function(err) {
-                console.log('Fetch error: ' + err);
-            });
-            
-            f.once('end', function() {
-                console.log('Done fetching all messages!');
-                imap.end();
-            });
+            mailparser.end();
+          });
         });
-    });
+      });
 
-    imap.once('error', function(err) {
-        console.log(err);
-    });
+      f.once('error', function(err) {
+        console.log('Fetch error: ' + err);
+      });
 
-    imap.once('end', function() {
-        res.end("ok");
+      f.once('end', function() {
+        console.log('Done fetching all messages!');
+        imap.end();
+      });
     });
+  });
 
-    imap.connect();
+  imap.once('error', function(err) {
+    console.log(err);
+  });
+
+  imap.once('end', function() {
+    res.end("ok");
+  });
+
+  imap.connect();
 });
 
 app.listen(PORT, function() {
-    console.log("pid: " + PID + ", listening on *:" + PORT + "\n");
+  console.log("pid: " + PID + ", listening on *:" + PORT + "\n");
 });
