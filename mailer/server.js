@@ -71,12 +71,10 @@ app.get("/ler-email", function(req, res) {
 
           stream.once('end', function() {
             mailparser.on("end", function(buffer) {
-              // console.log("From:", buffer.from); //[{address:'sender@example.com',name:'Sender Name'}]
-              // console.log("Subject:", buffer.subject); // Hello world!
-              // console.log("Text body:", buffer.text); // How are you today?
               res.end(buffer.text);
             });
 
+            mailparser.write(buffer);
             mailparser.end();
           });
         });
@@ -105,5 +103,5 @@ app.get("/ler-email", function(req, res) {
 });
 
 app.listen(PORT, function() {
-  console.log("pid: " + PID + ", listening on *:" + PORT + "\n");
+    console.log("pid: " + PID + ", listening on *:" + PORT + "\n");
 });
