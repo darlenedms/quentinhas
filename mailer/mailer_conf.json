@@ -1,0 +1,5 @@
+{
+  "host": "smtp.google.com",
+  "from": "mailer_from@gmail.com",
+  "to": "mailer_to@gmail.com"
+}
