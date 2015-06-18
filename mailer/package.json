@@ -1,0 +1,12 @@
+{
+  "name": "quentinhas",
+  "version": "0.1.0",
+  "description": "Facilitar o pedido/entrega da vossa quentinha de cada dia",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:darlenedms/quentinhas.git"
+  },
+  "dependencies": {
+    "express": "^4.12.3"
+  }
+}
