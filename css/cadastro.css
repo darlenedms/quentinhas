@@ -1,0 +1,7 @@
+#cadastro {
+  margin: 0 auto;
+  max-width: 300px;
+}
+#cadastro label, #cadastro input {
+  display: block;
+}
