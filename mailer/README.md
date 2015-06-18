@@ -15,7 +15,6 @@ cd mailer
 npm install
 ```
 
-
 ## Configuração
 
 Crie um arquivo mailer_conf.json em /mailer com as configurações de seu servidor smtp.
