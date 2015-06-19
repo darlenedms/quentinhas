@@ -2,15 +2,17 @@
 
 <html>
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Quentinha</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quentinha</title>
 
-<link href="css/cardapio.css" rel="stylesheet" type="text/css" />
-<link href='http://fonts.googleapis.com/css?family=Roboto:900,500,300,700,400' rel='stylesheet' type='text/css'>
+    <link href="css/cardapio.css" rel="stylesheet" type="text/css" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto:900,500,300,700,400' rel='stylesheet' type='text/css'>
 
-<link href='http://fonts.googleapis.com/css?family=Parisienne' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Parisienne' rel='stylesheet' type='text/css'>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
 </head>
 
 <body>
@@ -20,30 +22,43 @@
     <div id= "configuracao"></div>
 </header>
 
-<main>
-    <form method='post' action='http://quentinha.cloud.globoi.com/enviar-email'>
-        Tamanho<br>
+<script id="template-form-pedido" type="text/x-handlebars-template">
+    Tamanho<br>
+    <p>
         <select name='tamanho'>
-            <option value='500ml'>500ml - R$ 5,00</option>
-            <option value='750ml'>750ml - R$ 8,00</option>
+            <% _.each(tamanhos, function(valor, tamanho) { %>
+                <option value='<%= tamanho %>'><%= tamanho %> - <%= valor %></option>
+            <% }); %>
         </select>
-        <br>
-        <input name='dados' type='hidden' value='Sebastiao Augusto' />
-        <br>
-        <input name='opcao' type='checkbox' value='Alface' />Alface
-        <br>
-        <input name='opcao' type='checkbox' value='Cenoura' />Cenoura
-        <br>
-        <input name='opcao' type='checkbox' value='Macarrão' />Macarrão
-        <br>
+    </p>
+    
+    <% _.each(grupos, function(itens, nome) { %>
+        <p>
+            <strong><%= nome %></strong><br>
+            <% _.each(itens, function(item) { %>
+                <label>
+                    <input name='opcao' type='checkbox' value='<%= item %>' /><%= item %>
+                </label><br>
+            <% }); %>
+        </p>
+    <% }); %>
+
+    <p>
         <input type='submit' value="Enviar" class="enviar" />
-        <p></p>
-    </form>
+    </p>
+</script>
+
+<main>
+    <span id='placeholder-form-pedido'></span>
 </main>
 
 <script type="text/javascript">
-    callback = function(data) {
-        console.log(data);
+    callback = function(context) {
+        var source = $("#template-form-pedido").html();
+        var template = _.template(source);
+        var html = template(context);
+        
+        $('#placeholder-form-pedido').html(html);
     }
 </script>
 <script src="http://localhost:3000/ultimo-cardapio.js"></script>
