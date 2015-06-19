@@ -45,8 +45,8 @@ app.get("/send", function(req, res) {
     });
 });
 
-app.get("/ultimo-cardapio", function(req, res) {
-  res.end(JSON.stringify(ultimoCardapio));
+app.get("/ultimo-cardapio.js", function(req, res) {
+  res.end('callback(' + JSON.stringify(ultimoCardapio) + ');');
 });
 
 app.get("/ler-email", function(req, res) {
