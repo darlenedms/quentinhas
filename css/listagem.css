@@ -173,7 +173,6 @@ h3 {
 .pedido-online-wrapper {
   font-family: "Roboto", sans-serif;
   font-size: 12px;
-  text-align: right;
   font-weight: 400;
 }
 .pedido-online-wrapper .pedido-online-link {
@@ -184,6 +183,8 @@ h3 {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
+  margin: 0px;
+  display: inline-block;
 }
 .pedido-online-wrapper .pedido-online-link:hover {
   cursor: pointer;

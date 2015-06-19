@@ -2,9 +2,47 @@
 @import 'reset';
 @import 'quentinha-ui';
 
+#form-pedido {
+    margin: 0 auto;
+    padding: 20px 30px;
+    border-top: 1px solid #F5F5F5;
 
+    .tamanho {
+        width: 100%;
+        height: 44px;
+        font-size: 16px;
+        border: 0;
+        border-radius: 0;
+    }
 
+    p {
+        margin-bottom: 30px;
 
+        strong {
+            display: inline-block;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+    }
 
+    .enviar {
+        @include border-radius(4px);
+        width: 100%;
+        background: #0669de;
+        border: none;
+        color: #fff;
+        font-weight: 400;
+        font-size: 18px;
+        padding: 20px;
+        margin-top: 20px;
+    }
 
-
+    .email {
+        font-size: 18px;
+        width: 100%;
+        padding: 5px 10px;
+        font-weight: 400;
+    }
+}
