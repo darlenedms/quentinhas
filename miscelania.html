@@ -44,12 +44,14 @@
     <% }); %>
 
     <p>
+        <input name='dados' type='hidden' value='Nome do usuario' />
+        <input name='email' type='text' value='email@corp.globo.com' />
         <input type='submit' value="Enviar" class="enviar" />
     </p>
 </script>
 
 <main>
-    <form id='form-pedido' method='post' action='http://quentinha.cloud.globoi.com/enviar-email'>
+    <form id='form-pedido' method='post' action='http://localhost:3000/enviar-email'>
     </form>
 </main>
 

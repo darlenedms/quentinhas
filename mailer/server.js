@@ -1,4 +1,7 @@
 var ultimoCardapio = {};
+var emailDasPessoasQuePediram = {};
+
+/*------------------------------------------*/
 
 var MailParser = require("mailparser").MailParser,
     mailparser = new MailParser();
@@ -49,6 +52,9 @@ app.post("/enviar-email", function(req, res) {
         if (error) {
             res.end("error");
         } else {
+            var hoje = new Date().toJSON().slice(0,10);
+            emailDasPessoasQuePediram[hoje] = emailDasPessoasQuePediram[hoje] || [];
+            emailDasPessoasQuePediram[hoje].push(req.body.email);
             res.end("sent");
         }
     });
@@ -137,6 +143,9 @@ app.listen(PORT, function() {
     console.log("pid: " + PID + ", listening on *:" + PORT + "\n");
 });
 
+
+/*------------------------------------------*/
+
 REGEX_TAMANHO = /\d*ml/g;
 REGEX_PRECO = /R\$\d*,\d*/g;
 
@@ -209,3 +218,48 @@ var parser = function(texto) {
         'grupos': parserGrupos(linhas),
     }
 };
+
+
+/*------------------------------------------*/
+
+
+var xmpp = require('simple-xmpp');
+
+xmpp.on('online', function(data) {
+    console.log('Connected with JID: ' + data.jid.user);
+    console.log('Yes, I\'m connected!');
+});
+
+xmpp.on('chat', function(from, message) {
+    xmpp.send(from, 'echo: ' + message);
+});
+
+xmpp.on('error', function(err) {
+    console.error(err);
+});
+
+xmpp.on('subscribe', function(from) {
+    xmpp.acceptSubscription(from);
+});
+
+xmpp.connect({
+        jid                 : 'quentinhasaas@gmail.com',
+        password            : 'quentinhas123',
+        host                : 'talk.google.com',
+        port                : 5222
+});
+
+// check for incoming subscription requests
+xmpp.getRoster();
+
+app.get("/notificar-galera", function(req, res) {
+    var hoje = new Date().toJSON().slice(0,10);
+    
+    emailDasPessoasQuePediram[hoje].forEach(function(email){
+        xmpp.subscribe(email);
+        xmpp.send(email, 'Sua quentinha chegou! ' + hoje);
+    });
+    
+    res.end('ok')
+});
+
