@@ -1,11 +1,14 @@
-
 var ultimoCardapio = {};
 
 var MailParser = require("mailparser").MailParser,
     mailparser = new MailParser();
 var express = require("express");
 var app = express();
-
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 // Setup nconf
 var nconf = require("nconf");
@@ -26,20 +29,26 @@ var PORT = process.env.PORT || 3000;
 var PID = process.pid;
 var MONTHNAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-app.get("/send", function(req, res) {
+app.post("/enviar-email", function(req, res) {
+    var mailText = [];
+
+    mailText.push(req.body.tamanho);
+    mailText.push(req.body.dados);
+    mailText.push(req.body.opcao);
+
+    console.log(req.body.tamanho);
+
     var mailOptions = {
         from: nconf.get("from"),
         to: nconf.get("to"),
         subject: "hello world!",
-        text: "Authenticated with OAuth2"
+        text: mailText.join("/n")
     };
 
     transporter.sendMail(mailOptions, function(error, response) {
         if (error) {
-            console.log(error);
             res.end("error");
         } else {
-            console.log("Message sent: " + response.message);
             res.end("sent");
         }
     });
@@ -50,74 +59,78 @@ app.get("/ultimo-cardapio.js", function(req, res) {
 });
 
 app.get("/ler-email", function(req, res) {
-  var Imap = require('imap'),
-      inspect = require('util').inspect;
+    var Imap = require('imap'),
+        inspect = require('util').inspect;
 
-  var imap = new Imap({
-    user: 'quentinhasaas@gmail.com',
-    password: 'quentinhas123',
-    host: 'imap.gmail.com',
-    port: 993,
-    tls: true
-  });
-
-  function openInbox(cb) {
-    imap.openBox('INBOX', true, cb);
-  }
-
-  imap.on('ready', function() {
-    openInbox(function(err, box) {
-      if (err) throw err;
-
-      var d = new Date();
-      imap.search([ 'UNSEEN', ['FROM', 'lucas.santos@corp.globo.com'], ['SINCE', MONTHNAMES[d.getMonth] + d.getDate() + ', ' + d.getFullYear()] ], function(err, results) {
-        if (err) throw err;
-
-        var f = imap.fetch(results, { bodies: '' });
-
-        console.log(results);
-
-        f.on('message', function(msg, seqno) {
-          console.log(msg);
-          msg.on('body', function(stream, info) {
-            var buffer = '';
-            stream.on('data', function(chunk) {
-              buffer += chunk.toString('utf8');
-            });
-
-            stream.on('end', function() {
-              mailparser.on("end", function(buffer) {
-                ultimoCardapio = parser(buffer.text);
-                res.end(buffer.text);
-              });
-
-              mailparser.write(buffer);
-              mailparser.end();
-            });
-          });
-        });
-
-        f.on('error', function(err) {
-          console.log('Fetch error: ' + err);
-        });
-
-        f.on('end', function() {
-          console.log('Done fetching all messages!');
-          imap.end();
-        });
-      });
+    var imap = new Imap({
+        user: 'quentinhasaas@gmail.com',
+        password: 'quentinhas123',
+        host: 'imap.gmail.com',
+        port: 993,
+        tls: true
     });
-  });
 
-  imap.on('error', function(err) {
-    console.log(err);
-  });
+    function openInbox(cb) {
+        imap.openBox('INBOX', true, cb);
+    }
 
-  imap.on('end', function() {
-    res.end("ok");
-  });
+    imap.on('ready', function() {
+        openInbox(function(err, box) {
+            if (err) throw err;
 
-  imap.connect();
+            var d = new Date();
+            imap.search(['UNSEEN', ['FROM', 'lucas.santos@corp.globo.com'],
+                ['SINCE', MONTHNAMES[d.getMonth] + d.getDate() + ', ' + d.getFullYear()]
+            ], function(err, results) {
+                if (err) throw err;
+
+                var f = imap.fetch(results, {
+                    bodies: ''
+                });
+
+                console.log(results);
+
+                f.on('message', function(msg, seqno) {
+                    console.log(msg);
+                    msg.on('body', function(stream, info) {
+                        var buffer = '';
+                        stream.on('data', function(chunk) {
+                            buffer += chunk.toString('utf8');
+                        });
+
+                        stream.on('end', function() {
+                            mailparser.on("end", function(buffer) {
+                                ultimoCardapio = parser(buffer.text);
+                                res.end(buffer.text);
+                            });
+
+                            mailparser.write(buffer);
+                            mailparser.end();
+                        });
+                    });
+                });
+
+                f.on('error', function(err) {
+                    console.log('Fetch error: ' + err);
+                });
+
+                f.on('end', function() {
+                    console.log('Done fetching all messages!');
+                    imap.end();
+                });
+            });
+        });
+    });
+
+    imap.on('error', function(err) {
+        console.log(err);
+    });
+
+    imap.on('end', function() {
+        res.end("ok");
+    });
+
+    imap.connect();
 });
 
 app.listen(PORT, function() {
@@ -130,7 +143,7 @@ REGEX_PRECO = /R\$\d*,\d*/g;
 var parserTamanhos = function(linhas) {
     var saida = {};
 
-    linhas.forEach(function(linha){
+    linhas.forEach(function(linha) {
         var matchTamanho = linha.match(REGEX_TAMANHO);
         var matchPreco = linha.match(REGEX_PRECO);
 
@@ -148,13 +161,22 @@ var parserGrupos = function(linhas) {
     var nomeDoGrupo;
     var saida = {};
 
-    linhas.forEach(function(linha){
-        if (fimDoParser) { return; }
+    linhas.forEach(function(linha) {
+        if (fimDoParser) {
+            return;
+        }
 
         linha = linha.trim();
-        if (!linha) { return; }
-        if (linha.indexOf('Salada (') != -1) { return; }
-        if (linha.indexOf('TELEFONE') != -1) { fimDoParser = true; return; }
+        if (!linha) {
+            return;
+        }
+        if (linha.indexOf('Salada (') != -1) {
+            return;
+        }
+        if (linha.indexOf('TELEFONE') != -1) {
+            fimDoParser = true;
+            return;
+        }
 
         if (linha.indexOf('GRUPO') != -1) {
             nomeDoGrupo = linha;
