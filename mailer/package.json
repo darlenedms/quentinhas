@@ -13,7 +13,8 @@
     "nodemailer-smtp-transport": "1.0.3",
     "imap": "0.8.14",
     "mailparser": "0.5.1",
-    "body-parser": "0.1.0",
+    "body-parser": "1.13.1",
+    "node-expat": "2.3.8",
     "simple-xmpp": "0.1.92"
   }
 }
