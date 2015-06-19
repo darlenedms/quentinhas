@@ -8,33 +8,37 @@
 
 <link href="css/cadastro.css" rel="stylesheet" type="text/css" />
 <link href='http://fonts.googleapis.com/css?family=Roboto:900,500,300,700,400' rel='stylesheet' type='text/css'>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="js/vendor/localforage-1.2.3.js"></script>
 </head>
 
 <body>
 <header>
     <h1>Quentinhas</h1>
-    <p class= "zoeira">as a service</p>
-    <div id= "configuracao"></div>
+    <p class="zoeira">as a service</p>
+    <div id="configuracao"></div>
 </header>
 
 <main>
     <h2>Cadastre-se</h2>
-    <form id="cadastro" action="" method="POST">
-        <label for="nome">Nome</label>
-        <input type="text" name="nome" placeholder="Sebastião Augusto">
-        <label for="ramal">Ramal</label>
-        <input type="text" name="ramal" placeholder="1234">
-        <label for="email">E-mail</label>
-        <input type="text" name="email" placeholder="sebastiao.augusto@email.com">
-        <label for="empresa">Empresa</label>
+    <form id="cadastro" action="/">
+        <label for="nome">* Nome</label>
+        <input type="text" name="nome" placeholder="Sebastião Augusto" required>
+        <label for="ramal">* Ramal</label>
+        <input type="text" name="ramal" placeholder="1234" required>
+        <label for="email">* E-mail</label>
+        <input type="text" name="email" placeholder="sebastiao.augusto@email.com" required>
+        <label for="empresa">* Empresa</label>
         <select name="empresa" id="empresa">
             <option value="globocom" selected="true">Globo.com</option>
         </select>
         <label for="referencia">Referência</label>
         <input type="text" name="referencia" placeholder="1˚ andar">
+        <p>* Campos obrigatórios</p>
         <input type="submit" class="enviar" value="Cadastrar">
     </form>
 </main>
 </body>
+<script src="js/cadastro.js"></script>
 
 </html>
