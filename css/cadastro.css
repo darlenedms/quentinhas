@@ -131,9 +131,11 @@ main {
   font-size: 18px;
   width: 100%;
   padding: 5px 10px;
+  font-weight: 400;
 }
 #cadastro select {
   font-size: 16px;
+  margin-top: 10px;
 }
 #cadastro .enviar {
   -moz-border-radius: 4px;
@@ -147,6 +149,15 @@ main {
 }
 #cadastro .enviar:hover {
   cursor: pointer;
+  background: #0a62c7;
+  text-decoration: none;
+}
+
+#empresa {
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+  height: 44px;
 }
 
 input[type="text"]:-moz-placeholder {
@@ -160,4 +171,9 @@ input[type="text"]:-ms-input-placeholder {
 }
 input[type="text"]::-webkit-input-placeholder {
   color: #ddd;
+}
+
+p.obs {
+  font-size: 14px;
+  margin-top: 20px;
 }
