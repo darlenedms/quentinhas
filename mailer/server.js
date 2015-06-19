@@ -170,6 +170,9 @@ var parserGrupos = function(linhas) {
         if (!linha) {
             return;
         }
+        if (linha.indexOf('(') == -1 && linha.indexOf(')') > 0) {
+            return;
+        }
         if (linha.indexOf('Salada (') != -1) {
             return;
         }
