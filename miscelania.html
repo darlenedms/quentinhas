@@ -22,8 +22,23 @@
 </header>	
 
 <main>
-	
-	
+    <form method='post' action='http://quentinha.cloud.globoi.com/enviar-email'>
+        Tamanho<br>
+        <select name='tamanho'>
+            <option value='500ml'>500ml - R$ 5,00</option>
+            <option value='750ml'>750ml - R$ 8,00</option>
+        </select>
+        <br>
+        <input name='dados' type='hidden' value='Sebastiao Augusto' />
+        <br>
+        <input name='opcao' type='checkbox' value='Alface' />Alface
+        <br>
+        <input name='opcao' type='checkbox' value='Cenoura' />Cenoura
+        <br>
+        <input name='opcao' type='checkbox' value='Macarrão' />Macarrão
+        <br>
+        <input type='submit' />
+    </form>        
 </main>
 
 
