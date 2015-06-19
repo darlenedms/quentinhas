@@ -49,7 +49,8 @@
 </script>
 
 <main>
-    <span id='placeholder-form-pedido'></span>
+    <form id='form-pedido' method='post' action='http://quentinha.cloud.globoi.com/enviar-email'>
+    </form>
 </main>
 
 <script type="text/javascript">
@@ -58,7 +59,7 @@
         var template = _.template(source);
         var html = template(context);
         
-        $('#placeholder-form-pedido').html(html);
+        $('#form-pedido').html(html);
     }
 </script>
 <script src="http://localhost:3000/ultimo-cardapio.js"></script>
