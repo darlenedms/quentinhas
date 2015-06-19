@@ -2,9 +2,6 @@
 @import 'reset';
 @import 'quentinha-ui';
 
-
-$font-padrao:'Roboto', sans-serif;
-
 header {
 	width: 100%;
 
@@ -17,7 +14,7 @@ header {
 
 
 	h1 {
-		color: #0669de;
+		color: $cor-primaria;
 		text-align: center;
 		vertical-align: center;
 		font-family: $font-padrao;
@@ -28,40 +25,18 @@ header {
 		line-height: 50px;
 
 
-		
+
 	}
-	
+
     .zoeira {
         font-family: 'Parisienne', cursive;
         text-align: center;
         font-size: 15px;
         margin-top: -17px;
-        line-height: 30px;    
+        line-height: 30px;
     }
 }
 
-main {
-  margin-top: 110px;
-}
-
-p {
-	margin-bottom: 10px;
-	font-family: $font-padrao;
-	font-weight: 300;
-}
-
-h2 {
-	position: relative;
-	text-align: center;
-	margin-bottom: 10px;
-	font-size: 13px;
-	font-family:$font-padrao;
-	font-weight: 300;
-	text-transform: uppercase;
-
-
-	
-}
 
 h3 {
 	font: arial;
@@ -75,49 +50,51 @@ h3 {
 
 #lista {
 	list-style-type: none;
-	
-	
+
+
 	li {
-		padding: 20px 0 20px 30px;
+		padding: 20px 30px 0;
 		width: 100%;
 		height: auto;
 		margin-bottom: 30px;
 		border-top: 1px solid #F5F5F5;
-        @include box-sizing(border-box); 
+        @include box-sizing(border-box);
 
 		.preco {
 
-            font-family: Roboto, arial;
+            font-family: $font-padrao;
             font-weight: 500;
             color: rgb(210, 210, 210);
             margin-bottom: 20px;
             text-align: right;
-            margin-right: 20px;
 		}
 
 
 	}
 }
 
-button {
-            @include border-radius (6px);
-                font-family: Arial;
-                color: #ffffff;
-                font-size: 10px;
-                background: #0669de;
-                padding: 10px 20px 10px 20px;
-                text-decoration: none;
-                border: 0px;
-                float: right;
-                margin-right: 20px;
-        
-            &:hover {
-                background: #0a62c7;
-                text-decoration: none;
-            }
+.pedido-online-wrapper {
+    font-family: $font-padrao;
+    font-size: 12px;
+    text-align: right;
+
+    .pedido-online-link {
+        color: #ffffff;
+        background: $cor-primaria;
+        padding: 10px 20px;
+        text-decoration: none;
+        @include border-radius (4px);
+
+        &:hover {
+            background: #0a62c7;
+            text-decoration: none;
         }
+    }
+}
 
-
+.telefone {
+    display: block;
+}
 
 
 

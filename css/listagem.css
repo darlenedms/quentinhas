@@ -1,10 +1,14 @@
-@charset "utf-8";
-/* http://meyerweb.com/eric/tools/css/reset/ 
+/* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
 /* CSS Document */
-/* line 20, ../sass/_reset.scss */
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -27,46 +31,38 @@ time, mark, audio, video {
 }
 
 /* HTML5 display-role reset for older browsers */
-/* line 30, ../sass/_reset.scss */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
 
-/* line 33, ../sass/_reset.scss */
 body {
   line-height: 1;
 }
 
-/* line 36, ../sass/_reset.scss */
 ol, ul, li {
   list-style: none;
 }
 
-/* line 39, ../sass/_reset.scss */
 blockquote, q {
   quotes: none;
 }
 
-/* line 43, ../sass/_reset.scss */
 blockquote:before, blockquote:after,
 q:before, q:after {
   content: '';
   content: none;
 }
 
-/* line 47, ../sass/_reset.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 52, ../sass/_reset.scss */
 a {
   text-decoration: none;
 }
 
-/* line 3, ../sass/_quentinha-ui.scss */
 header {
   width: 100%;
   background-color: #F5F5F5;
@@ -76,7 +72,6 @@ header {
   position: fixed;
   top: 0;
 }
-/* line 14, ../sass/_quentinha-ui.scss */
 header h1 {
   color: #0669de;
   text-align: center;
@@ -87,7 +82,6 @@ header h1 {
   text-transform: uppercase;
   line-height: 50px;
 }
-/* line 29, ../sass/_quentinha-ui.scss */
 header .zoeira {
   font-family: 'Parisienne', cursive;
   text-align: center;
@@ -96,49 +90,6 @@ header .zoeira {
   line-height: 30px;
 }
 
-/* line 8, ../sass/listagem.scss */
-header {
-  width: 100%;
-  background-color: #F5F5F5;
-  margin-bottom: 30px;
-  z-index: 20;
-  vertical-align: center;
-  position: fixed;
-  top: 0;
-}
-/* line 19, ../sass/listagem.scss */
-header h1 {
-  color: #0669de;
-  text-align: center;
-  vertical-align: center;
-  font-family: "Roboto", sans-serif;
-  font-size: 25px;
-  font-weight: 700;
-  text-transform: uppercase;
-  line-height: 50px;
-}
-/* line 34, ../sass/listagem.scss */
-header .zoeira {
-  font-family: 'Parisienne', cursive;
-  text-align: center;
-  font-size: 15px;
-  margin-top: -17px;
-  line-height: 30px;
-}
-
-/* line 43, ../sass/listagem.scss */
-main {
-  margin-top: 110px;
-}
-
-/* line 47, ../sass/listagem.scss */
-p {
-  margin-bottom: 10px;
-  font-family: "Roboto", sans-serif;
-  font-weight: 300;
-}
-
-/* line 53, ../sass/listagem.scss */
 h2 {
   position: relative;
   text-align: center;
@@ -149,7 +100,47 @@ h2 {
   text-transform: uppercase;
 }
 
-/* line 66, ../sass/listagem.scss */
+a:focus {
+  outline: 0;
+}
+
+p, a {
+  margin-bottom: 10px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+}
+
+main {
+  margin-top: 110px;
+}
+
+header {
+  width: 100%;
+  background-color: #F5F5F5;
+  margin-bottom: 30px;
+  z-index: 20;
+  vertical-align: center;
+  position: fixed;
+  top: 0;
+}
+header h1 {
+  color: #0669de;
+  text-align: center;
+  vertical-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 50px;
+}
+header .zoeira {
+  font-family: 'Parisienne', cursive;
+  text-align: center;
+  font-size: 15px;
+  margin-top: -17px;
+  line-height: 30px;
+}
+
 h3 {
   font: arial;
   font-size: 25px;
@@ -158,50 +149,46 @@ h3 {
   float: left;
 }
 
-/* line 76, ../sass/listagem.scss */
 #lista {
   list-style-type: none;
 }
-/* line 80, ../sass/listagem.scss */
 #lista li {
-  padding: 20px 0 20px 30px;
+  padding: 20px 30px 0;
   width: 100%;
   height: auto;
   margin-bottom: 30px;
   border-top: 1px solid #F5F5F5;
-  -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-/* line 88, ../sass/listagem.scss */
 #lista li .preco {
-  font-family: Roboto, arial;
+  font-family: "Roboto", sans-serif;
   font-weight: 500;
   color: #d2d2d2;
   margin-bottom: 20px;
   text-align: right;
-  margin-right: 20px;
 }
 
-/* line 102, ../sass/listagem.scss */
-button {
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  -ms-border-radius: 6px;
-  -o-border-radius: 6px;
-  border-radius: 6px;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 10px;
-  background: #0669de;
-  padding: 10px 20px 10px 20px;
-  text-decoration: none;
-  border: 0px;
-  float: right;
-  margin-right: 20px;
+.pedido-online-wrapper {
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  text-align: right;
 }
-/* line 114, ../sass/listagem.scss */
-button:hover {
+.pedido-online-wrapper .pedido-online-link {
+  color: #ffffff;
+  background: #0669de;
+  padding: 10px 20px;
+  text-decoration: none;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+.pedido-online-wrapper .pedido-online-link:hover {
   background: #0a62c7;
   text-decoration: none;
+}
+
+.telefone {
+  display: block;
 }
