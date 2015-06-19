@@ -45,7 +45,7 @@ app.post("/enviar-email", function(req, res) {
         from: nconf.get("from"),
         to: nconf.get("to"),
         subject: "hello world!",
-        text: mailText.join("/n")
+        text: mailText.join('\n')
     };
 
     transporter.sendMail(mailOptions, function(error, response) {
@@ -85,7 +85,7 @@ app.get("/ler-email", function(req, res) {
             if (err) throw err;
 
             var d = new Date();
-            imap.search(['UNSEEN', ['FROM', 'lucas.santos@corp.globo.com'],
+            imap.search(['UNSEEN', ['FROM', 'miscelaniadowntown@gmail.com'],
                 ['SINCE', MONTHNAMES[d.getMonth] + d.getDate() + ', ' + d.getFullYear()]
             ], function(err, results) {
                 if (err) throw err;
