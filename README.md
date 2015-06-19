@@ -13,10 +13,14 @@ v0.12.0
 
 ## Instalando dependências
 
+No ubuntu: sudo apt-get install libexpat1 libexpat1-dev libicu-dev
+
+
 ```sh
 cd mailer
 npm install
 ```
+
 
 ## Configuração
 
