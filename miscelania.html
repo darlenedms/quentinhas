@@ -11,15 +11,14 @@
 <link href='http://fonts.googleapis.com/css?family=Roboto:900,500,300,700,400' rel='stylesheet' type='text/css'>
 
 <link href='http://fonts.googleapis.com/css?family=Parisienne' rel='stylesheet' type='text/css'>
-
 </head>
 
 <body>
 <header>
-	<h1> Quentinhas </h1>
-	<p class= "zoeira">as a service</p>
-	<div id= "configuracao"></div>
-</header>	
+    <h1>Quentinhas</h1>
+    <p class= "zoeira">as a service</p>
+    <div id= "configuracao"></div>
+</header>
 
 <main>
     <form method='post' action='http://quentinha.cloud.globoi.com/enviar-email'>
@@ -37,10 +36,17 @@
         <br>
         <input name='opcao' type='checkbox' value='Macarrão' />Macarrão
         <br>
-        <input type='submit' />
-    </form>        
+        <input type='submit' value="Enviar" class="enviar" />
+        <p></p>
+    </form>
 </main>
 
+<script type="text/javascript">
+    callback = function(data) {
+        console.log(data);
+    }
+</script>
+<script src="http://localhost:3000/ultimo-cardapio.js"></script>
 
 </body>
 
