@@ -20,6 +20,7 @@ var transporter = nodemailer.createTransport(smtpTransport({
 
 var PORT = process.env.PORT || 3000;
 var PID = process.pid;
+var MONTHNAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 app.get("/send", function(req, res) {
     var mailOptions = {
@@ -56,46 +57,54 @@ app.get("/ler-email", function(req, res) {
     imap.openBox('INBOX', true, cb);
   }
 
-  imap.once('ready', function() {
+  imap.on('ready', function() {
     openInbox(function(err, box) {
       if (err) throw err;
 
-      var f = imap.seq.fetch('1:3', {bodies: '', struct: true});
+      var d = new Date();
+      imap.search([ 'UNSEEN', ['FROM', 'lucas.santos@corp.globo.com'], ['SINCE', MONTHNAMES[d.getMonth] + d.getDate() + ', ' + d.getFullYear()] ], function(err, results) {
+        if (err) throw err;
 
-      f.on('message', function(msg, seqno) {
-        msg.on('body', function(stream, info) {
-          var buffer = '';
-          stream.on('data', function(chunk) {
-            buffer += chunk.toString('utf8');
-          });
+        var f = imap.fetch(results, { bodies: '' });
 
-          stream.once('end', function() {
-            mailparser.on("end", function(buffer) {
-              res.end(buffer.text);
+        console.log(results);
+
+        f.on('message', function(msg, seqno) {
+          console.log(msg);
+          msg.on('body', function(stream, info) {
+            var buffer = '';
+            stream.on('data', function(chunk) {
+              buffer += chunk.toString('utf8');
             });
 
-            mailparser.write(buffer);
-            mailparser.end();
+            stream.on('end', function() {
+              mailparser.on("end", function(buffer) {
+                res.end(buffer.text);
+              });
+
+              mailparser.write(buffer);
+              mailparser.end();
+            });
           });
         });
-      });
 
-      f.once('error', function(err) {
-        console.log('Fetch error: ' + err);
-      });
+        f.on('error', function(err) {
+          console.log('Fetch error: ' + err);
+        });
 
-      f.once('end', function() {
-        console.log('Done fetching all messages!');
-        imap.end();
+        f.on('end', function() {
+          console.log('Done fetching all messages!');
+          imap.end();
+        });
       });
     });
   });
 
-  imap.once('error', function(err) {
+  imap.on('error', function(err) {
     console.log(err);
   });
 
-  imap.once('end', function() {
+  imap.on('end', function() {
     res.end("ok");
   });
 
