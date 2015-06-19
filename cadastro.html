@@ -6,21 +6,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Cadastro</title>
 
-<link href="css/listagem.css" rel="stylesheet" type="text/css" />
 <link href="css/cadastro.css" rel="stylesheet" type="text/css" />
 <link href='http://fonts.googleapis.com/css?family=Roboto:900,500,300,700,400' rel='stylesheet' type='text/css'>
-
 </head>
 
 <body>
 <header>
     <h1>Quentinhas</h1>
+    <p class= "zoeira">as a service</p>
     <div id= "configuracao"></div>
 </header>
 
 <main>
     <h2>Cadastre-se</h2>
-    <form id="cadastro" action="">
+    <form id="cadastro" action="" method="POST">
         <label for="nome">Nome</label>
         <input type="text" name="nome" placeholder="Sebastião Augusto">
         <label for="ramal">Ramal</label>
@@ -33,6 +32,7 @@
         </select>
         <label for="referencia">Referência</label>
         <input type="text" name="referencia" placeholder="1˚ andar">
+        <input type="submit" class="enviar" value="Enviar">
     </form>
 </main>
 </body>

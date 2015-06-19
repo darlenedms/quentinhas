@@ -1,8 +1,49 @@
+@import "compass";
+@import 'reset';
+@import 'quentinha-ui';
+
 #cadastro {
     margin: 0 auto;
-    max-width: 300px;
+    padding: 20px 30px;
+    border-top: 1px solid #F5F5F5;
 
     label, input {
         display: block;
+        font-family: $font-padrao;
+    }
+
+    label {
+        margin-top: 20px;
+        padding: 5px 0;
+    }
+
+    input {
+        font-size: 18px;
+        width: 100%;
+        padding: 5px 10px;
+    }
+
+    select {
+        font-size: 22px;
+    }
+
+    .enviar {
+        @include border-radius (4px);
+        margin-top: 20px;
+        background: $cor-primaria;
+        border: none;
+        padding: 20px;
+        color: #fff;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+}
+
+input[type="text"] {
+    @include input-placeholder {
+        color: #ddd;
     }
 }
